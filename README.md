@@ -2,6 +2,8 @@
 
 A research-first Python system for collecting, modeling, paper trading, and (only after explicit opt-in) trading Kalshi's rolling 15-minute commodity event contracts.
 
+**[Open the Kalshi Signal Lab website](https://mitch123546.github.io/Kalshi-Trading-Bot/)**
+
 The default is **automatic market selection**. On the research snapshot taken November 11, 2026, Kalshi's category page showed gold with the most aggregate displayed commodity volume, but the live API showed that gold was between active sessions while WTI, Brent, and natural gas were open. `--series auto` therefore discovers the live catalog and periodically re-scores only available markets by volume, spread, and—after enough outcomes—local calibration.
 
 > This is experimental software, not a promise of profit or financial advice. Fifteen-minute price direction is noisy, fees and adverse selection are material, and a high hit rate can still lose money when contracts are expensive.

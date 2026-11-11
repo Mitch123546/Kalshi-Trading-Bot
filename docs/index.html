@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="A research-first, fee-aware trading system for Kalshi's 15-minute commodity markets. Paper mode by default."
+    />
+    <meta name="theme-color" content="#07110f" />
+    <meta property="og:title" content="Kalshi Signal Lab" />
+    <meta
+      property="og:description"
+      content="Collect. Calibrate. Prove the edge. Then decide whether to trade."
+    />
+    <meta property="og:type" content="website" />
+    <title>Kalshi Signal Lab — 15-minute commodity research</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22><rect width=%2264%22 height=%2264%22 rx=%2215%22 fill=%22%2307110f%22/><path d=%22M15 43V21h8v8l9-8h11L31 32l14 11H33L23 34v9z%22 fill=%22%23b8ff5a%22/></svg>" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="Kalshi Signal Lab home">
+        <span class="brand-mark" aria-hidden="true">K</span>
+        <span>Signal Lab</span>
+      </a>
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span></span><span></span><span></span>
+        <span class="sr-only">Toggle navigation</span>
+      </button>
+      <nav id="site-nav" aria-label="Primary navigation">
+        <a href="#system">System</a>
+        <a href="#edge-lab">Edge lab</a>
+        <a href="#learning-model">Learning model</a>
+        <a href="#safety">Safety</a>
+        <a class="nav-cta" href="https://github.com/Mitch123546/Kalshi-Trading-Bot">View source</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top">
+        <div class="hero-copy reveal">
+          <p class="eyebrow"><span class="pulse-dot"></span> Research system · paper by default</p>
+          <h1>Trade the next<br />15 minutes like<br /><em>a scientist.</em></h1>
+          <p class="hero-lede">
+            A fee-aware Kalshi commodity bot that collects the book, tracks the settlement
+            feed, measures calibration, and refuses to confuse a confident guess with an edge.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#edge-lab">Test a signal</a>
+            <a class="button button-secondary" href="https://github.com/Mitch123546/Kalshi-Trading-Bot#setup">Run locally</a>
+          </div>
+          <p class="hero-note">No profit promises. No hidden backtest assumptions. No live orders without three explicit gates.</p>
+        </div>
+
+        <div class="terminal-wrap reveal" aria-label="Illustrative WTI market monitor">
+          <div class="terminal-glow"></div>
+          <article class="terminal">
+            <header class="terminal-header">
+              <div class="window-dots" aria-hidden="true"><i></i><i></i><i></i></div>
+              <span>MARKET MONITOR</span>
+              <span class="demo-label">ILLUSTRATIVE</span>
+            </header>
+            <div class="market-heading">
+              <div>
+                <p>WTI · 15 MIN</p>
+                <h2>Higher at close?</h2>
+              </div>
+              <div class="countdown"><span id="countdown">04:21</span><small>TO CLOSE</small></div>
+            </div>
+            <div class="quote-row">
+              <div><small>UNDERLYING</small><strong id="spot-price">$85.386</strong></div>
+              <div><small>TARGET</small><strong>$85.420</strong></div>
+              <div><small>YES BOOK</small><strong class="acid">39 / 40¢</strong></div>
+            </div>
+            <svg class="market-chart" viewBox="0 0 640 230" role="img" aria-labelledby="chart-title chart-desc">
+              <title id="chart-title">Illustrative underlying price versus target</title>
+              <desc id="chart-desc">A simulated price line moving around a fixed target line.</desc>
+              <defs>
+                <linearGradient id="area-gradient" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0" stop-color="#b8ff5a" stop-opacity=".24" />
+                  <stop offset="1" stop-color="#b8ff5a" stop-opacity="0" />
+                </linearGradient>
+                <filter id="line-glow"><feGaussianBlur stdDeviation="3" result="blur" /><feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge></filter>
+              </defs>
+              <g class="grid-lines"><path d="M0 40H640M0 95H640M0 150H640M0 205H640" /></g>
+              <path class="target-line" d="M0 105H640" />
+              <text class="target-text" x="12" y="96">TARGET 85.420</text>
+              <path id="area-path" class="area-path" d="" />
+              <path id="price-path" class="price-path" d="" filter="url(#line-glow)" />
+              <circle id="price-dot" class="price-dot" r="5" cx="0" cy="0" />
+            </svg>
+            <div class="signal-strip">
+              <div><span>MODEL</span><strong>25.2% YES</strong></div>
+              <div><span>MARKET</span><strong>39.5% YES</strong></div>
+              <div class="signal-verdict"><span>ACTION</span><strong>PASS</strong></div>
+            </div>
+          </article>
+          <p class="terminal-caption">The visual is simulated. The software connects to Kalshi's current public production feed.</p>
+        </div>
+      </section>
+
+      <section class="proof-strip" aria-label="System facts">
+        <div><strong>01</strong><span>Current Kalshi V2 API</span></div>
+        <div><strong>$0</strong><span>Live risk by default</span></div>
+        <div><strong>30+</strong><span>Settled markets before training</span></div>
+        <div><strong>1×</strong><span>Maximum entry per market</span></div>
+      </section>
+
+      <section class="section system" id="system">
+        <div class="section-kicker reveal">01 · The system</div>
+        <div class="section-heading reveal">
+          <h2>Evidence first.<br /><span>Orders last.</span></h2>
+          <p>The bot is built as a measurement loop. Every stage can veto the next one.</p>
+        </div>
+        <div class="loop-grid">
+          <article class="loop-card reveal">
+            <span class="card-number">01</span>
+            <div class="card-icon capture-icon" aria-hidden="true"></div>
+            <h3>Capture</h3>
+            <p>Read the active commodity, exact settlement-aligned underlying, bid-only book, spread, depth, volume, and time remaining.</p>
+            <code>kalshi-bot run --series auto</code>
+          </article>
+          <article class="loop-card reveal">
+            <span class="card-number">02</span>
+            <div class="card-icon model-icon" aria-hidden="true"></div>
+            <h3>Model</h3>
+            <p>Compare a transparent diffusion baseline with a calibrated local PyTorch challenger trained only on earlier markets.</p>
+            <code>kalshi-bot train</code>
+          </article>
+          <article class="loop-card reveal">
+            <span class="card-number">03</span>
+            <div class="card-icon prove-icon" aria-hidden="true"></div>
+            <h3>Prove</h3>
+            <p>Replay executable asks—not fantasy midpoints—with Kalshi's nonlinear fee, one decision per market, and chronological splits.</p>
+            <code>kalshi-bot backtest</code>
+          </article>
+          <article class="loop-card reveal">
+            <span class="card-number">04</span>
+            <div class="card-icon gate-icon" aria-hidden="true"></div>
+            <h3>Gate</h3>
+            <p>Trade only when net edge, spread, timing, open exposure, and daily loss checks all pass. Otherwise: log and move on.</p>
+            <code>ACTION = PASS</code>
+          </article>
+        </div>
+      </section>
+
+      <section class="section edge-section" id="edge-lab">
+        <div class="edge-copy reveal">
+          <div class="section-kicker">02 · Interactive edge lab</div>
+          <h2>Accuracy is not<br /><span>profitability.</span></h2>
+          <p>
+            A model can be right 70% of the time and still lose if it pays 85¢ for those wins.
+            Move the inputs and see the fee-adjusted expected value before a trade exists.
+          </p>
+          <ul class="plain-list">
+            <li>Uses the general quadratic taker-fee formula</li>
+            <li>Prices the actual side bought</li>
+            <li>Requires configurable net edge after fees</li>
+          </ul>
+        </div>
+        <div class="calculator reveal">
+          <div class="calculator-top">
+            <div><span>EDGE / CONTRACT</span><strong id="edge-output">+8.49¢</strong></div>
+            <div id="lab-verdict" class="lab-verdict positive">QUALIFIES</div>
+          </div>
+          <label for="probability">
+            <span>Model probability</span><output id="probability-output">64%</output>
+          </label>
+          <input id="probability" type="range" min="1" max="99" value="64" />
+          <label for="ask-price">
+            <span>Contract ask</span><output id="ask-output">54¢</output>
+          </label>
+          <input id="ask-price" type="range" min="1" max="99" value="54" />
+          <label for="contracts">
+            <span>Contracts</span><output id="contracts-output">10</output>
+          </label>
+          <input id="contracts" type="range" min="1" max="100" value="10" />
+          <div class="calculation-grid">
+            <div><span>Position cost</span><strong id="cost-output">$5.40</strong></div>
+            <div><span>Est. taker fee</span><strong id="fee-output">$0.18</strong></div>
+            <div><span>Expected P&amp;L</span><strong id="ev-output">+$0.85</strong></div>
+            <div><span>Break-even</span><strong id="breakeven-output">55.8%</strong></div>
+          </div>
+          <p class="calculator-note">Illustrative research tool. Actual series fees can differ; current rules always control.</p>
+        </div>
+      </section>
+
+      <section class="section learner" id="learning-model">
+        <div class="section-kicker reveal">03 · The learning model</div>
+        <div class="learner-intro reveal">
+          <div>
+            <p class="eyebrow eyebrow-static">CHALLENGER, NOT ORACLE</p>
+            <h2>A second brain is useful.<br /><span>A second unchecked bot is not.</span></h2>
+          </div>
+          <p>
+            Train a separate research model on years of 15-minute gold bars, then challenge it
+            with Kalshi-specific data as that history accumulates. It should produce probabilities—not orders—and earn promotion through untouched forward tests.
+          </p>
+        </div>
+
+        <div class="model-architecture reveal">
+          <div class="data-stack">
+            <article><i class="source-gold"></i><div><strong>Underlying history</strong><span>Gold returns, volatility, session, trend, range</span></div></article>
+            <article><i class="source-book"></i><div><strong>Kalshi microstructure</strong><span>Bid/ask, imbalance, volume, time to close</span></div></article>
+            <article><i class="source-context"></i><div><strong>Market context</strong><span>Dollar, rates, scheduled macro releases</span></div></article>
+          </div>
+          <div class="architecture-arrow" aria-hidden="true"><span></span><b>CAUSAL FEATURES</b></div>
+          <div class="model-core">
+            <span>LOCAL CUDA MODEL</span>
+            <strong>Calibrated<br />probability</strong>
+            <div class="probability-ring"><b>p</b><small>UP</small></div>
+          </div>
+          <div class="architecture-arrow" aria-hidden="true"><span></span><b>WALK-FORWARD</b></div>
+          <div class="promotion-gate">
+            <span>PROMOTION GATE</span>
+            <ul>
+              <li><i></i> Beats naïve baseline</li>
+              <li><i></i> Beats market calibration</li>
+              <li><i></i> Positive after fees</li>
+              <li><i></i> Survives forward paper</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="warning-grid">
+          <article class="warning-card good reveal">
+            <span>GOOD IDEA</span>
+            <h3>Use years of underlying gold data</h3>
+            <p>It gives the model many market regimes and enough observations to study session effects, volatility clustering, and short-term momentum or mean reversion.</p>
+          </article>
+          <article class="warning-card caution reveal">
+            <span>WATCH OUT</span>
+            <h3>Gold bars are not Kalshi fills</h3>
+            <p>Underlying history can train direction. It cannot recreate Kalshi's historical spread, queue, fees, target construction, or whether your order would have filled.</p>
+          </article>
+          <article class="warning-card danger reveal">
+            <span>BAD IDEA</span>
+            <h3>Let two bots trade independently</h3>
+            <p>They can double the same exposure, disagree without a tie-break rule, and learn from overlapping data. One execution and risk engine should arbitrate every model.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section scoreboard">
+        <div class="section-kicker reveal">04 · The only scoreboard that matters</div>
+        <div class="scoreboard-grid">
+          <div class="score-copy reveal">
+            <h2>Promote on evidence.<br /><span>Retire on drift.</span></h2>
+            <p>A model stays a challenger until it wins on data it never saw. Once promoted, it remains monitored against simple baselines.</p>
+          </div>
+          <div class="metrics-table reveal" role="table" aria-label="Model evaluation metrics">
+            <div class="metric-row metric-head" role="row"><span>TEST</span><span>WHY IT EXISTS</span><span>PASS CONDITION</span></div>
+            <div class="metric-row" role="row"><strong>Brier score</strong><span>Probability calibration</span><b>Below baseline</b></div>
+            <div class="metric-row" role="row"><strong>Log loss</strong><span>Punishes false certainty</span><b>Stable out-of-sample</b></div>
+            <div class="metric-row" role="row"><strong>Net P&amp;L</strong><span>Spread + fees included</span><b>Positive confidence band</b></div>
+            <div class="metric-row" role="row"><strong>Forward paper</strong><span>Reality after model freeze</span><b>Multiple regimes</b></div>
+            <div class="metric-row" role="row"><strong>Drift check</strong><span>Edge can decay</span><b>No material degradation</b></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section safety" id="safety">
+        <div class="safety-panel reveal">
+          <div class="section-kicker">05 · Live safety</div>
+          <h2>Production is a<br /><span>three-key vault.</span></h2>
+          <p>Possessing an API key is deliberately not enough to place a live order.</p>
+          <div class="vault-keys">
+            <div><span>KEY 01</span><code>KALSHI_ENV=prod</code></div>
+            <div><span>KEY 02</span><code>KALSHI_ALLOW_LIVE=true</code></div>
+            <div><span>KEY 03</span><code>--confirm-live</code></div>
+          </div>
+          <p class="vault-note">All three must be present in the same run. Paper mode is the default.</p>
+        </div>
+        <div class="risk-limits reveal">
+          <h3>Every cycle can say no.</h3>
+          <ul>
+            <li><span>Per-order worst-case cap</span><b>$2 default</b></li>
+            <li><span>Total open-risk cap</span><b>$10 default</b></li>
+            <li><span>Minimum fee-adjusted edge</span><b>8¢ default</b></li>
+            <li><span>Maximum spread</span><b>10¢ default</b></li>
+            <li><span>Entry timing window</span><b>45–480 sec</b></li>
+            <li><span>Duplicate market entry</span><b>Blocked</b></li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="final-cta">
+        <div class="reveal">
+          <p class="eyebrow eyebrow-static">OPEN SOURCE · LOCAL FIRST</p>
+          <h2>Collect the data.<br />Challenge the model.<br /><em>Keep the receipts.</em></h2>
+          <div class="hero-actions">
+            <a class="button button-primary" href="https://github.com/Mitch123546/Kalshi-Trading-Bot">Explore the repository</a>
+            <a class="button button-secondary" href="https://github.com/Mitch123546/Kalshi-Trading-Bot#collect-before-training">Start collecting</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <a class="brand" href="#top"><span class="brand-mark">K</span><span>Signal Lab</span></a>
+      <p>Experimental research software. Not financial advice. Trading involves risk.</p>
+      <div><a href="https://github.com/Mitch123546/Kalshi-Trading-Bot">GitHub</a><a href="https://docs.kalshi.com/">Kalshi API docs</a></div>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>
